@@ -5,7 +5,6 @@ import AccountIcon from '@/assets/icons/UserCircle.svg'
 import MenuIcon from '@/assets/icons/MenuIcon.svg'
 import cancelIcon from '@/assets/icons/cancelIcon.svg'
 
-
 const favoriteCount = ref(0)
 const mobileMenu = ref(false)
 
@@ -15,8 +14,6 @@ const navItems = [
   { text: 'Sales', route: '/sales' },
   { text: 'Journal', route: '/journal' },
 ]
-
-
 </script>
 
 <template>
@@ -80,14 +77,13 @@ const navItems = [
       <transition name="slide-fade">
         <div v-if="mobileMenu" class="mobile-menu-overlay">
           <div class="mobile-menu-content">
-
             <div class="mobile-menu-header">
-            <v-btn icon @click="mobileMenu = false" class="close-btn">
-              <v-icon>
-                <v-img :src="cancelIcon" height="40" width="40" />
-              </v-icon>
-            </v-btn>
-          </div>
+              <v-btn icon @click="mobileMenu = false" class="close-btn">
+                <v-icon>
+                  <v-img :src="cancelIcon" height="40" width="40" />
+                </v-icon>
+              </v-btn>
+            </div>
             <v-list class="mobile-nav-items">
               <v-list-item
                 v-for="(item, i) in navItems"
@@ -151,11 +147,11 @@ const navItems = [
   display: none;
 }
 
-.icons-mobile__account{
+.icons-mobile__account {
   display: none;
 }
 
-.icons-mobile .icons-mobile__like{
+.icons-mobile .icons-mobile__like {
   display: none;
 }
 @media (max-width: 920px) {
@@ -174,17 +170,16 @@ const navItems = [
   }
 
   .mobile-menu-overlay {
-    position:fixed;
-   top: 0px;
+    position: fixed;
+    top: 0px;
     left: 0;
     right: 0;
-bottom: 0;
-height: 100vh;
+    bottom: 0;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
     display: flex;
     justify-content: flex-end;
-
   }
 
   .mobile-menu-content {

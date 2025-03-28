@@ -1,49 +1,45 @@
 <script setup>
-import { ref } from 'vue';
-import LikeIcon from '@/assets/icons/likeIcon.svg'; // Import your heart icons
-
+import { ref } from 'vue'
+import LikeIcon from '@/assets/icons/likeIcon.svg'
 
 const props = defineProps({
   image: String,
   name: String,
   price: [String, Number],
   product: Object,
-});
+})
 
-const emit = defineEmits(['click', 'favorite']);
-const isFavorite = ref(false);
+const emit = defineEmits(['click', 'favorite'])
+const isFavorite = ref(false)
 
 function handleClick() {
-  emit('click', props.product);
+  emit('click', props.product)
 }
 
 function toggleFavorite(e) {
-  e.stopPropagation();
-  isFavorite.value = !isFavorite.value;
+  e.stopPropagation()
+  isFavorite.value = !isFavorite.value
   emit('favorite', {
     product: props.product,
-    favorite: isFavorite.value
-  });
+    favorite: isFavorite.value,
+  })
 }
 </script>
 
 <template>
   <v-card class="product-card" @click="handleClick" flat>
-    <!-- Image container with favorite button -->
     <div class="image-container">
       <v-img height="300" :src="props.image" cover width="100%" class="product-image" />
 
-      <!-- Favorite button -->
-      <button class="favorite-btn" @click="toggleFavorite" :style="{ backgroundColor: isFavorite ? '#ff5252' : 'white' }">
-        <img
-          :src="LikeIcon"
-          alt="Favorite"
-          class="heart-icon"
-        />
+      <button
+        class="favorite-btn"
+        @click="toggleFavorite"
+        :style="{ backgroundColor: isFavorite ? '#ff5252' : 'white' }"
+      >
+        <img :src="LikeIcon" alt="Favorite" class="heart-icon" />
       </button>
     </div>
 
-    <!-- Product info -->
     <v-card-item class="card-item">
       <v-card-title class="product-name">{{ props.name }}</v-card-title>
       <v-card-subtitle class="product-price">${{ props.price }}</v-card-subtitle>
@@ -69,7 +65,7 @@ function toggleFavorite(e) {
 }
 
 .product-image {
-  background: #f5f5f5; /* Light gray background for image area */
+  background: #f5f5f5;
 }
 
 .favorite-btn {

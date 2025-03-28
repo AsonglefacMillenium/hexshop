@@ -1,103 +1,3 @@
-<!-- <script setup>
-import { products } from '@/data/product-data'
-import ProductCard from '@/components/product/ProductCard.vue'
-import ProductModal from '@/components/product/ProductModal.vue'
-import { ref } from 'vue'
-
-
-const selectedProduct = ref(null)
-const showDetails = ref(false)
-const favoriteCount = ref(0)
-const favorites = ref([])
-
-const openProductDetails = (product) => {
-  selectedProduct.value = product
-  showDetails.value = true
-}
-
-const closeDetails =() => {
-  showDetails.value = false
-  // Small delay to ensure modal is fully closed before reopening
-  setTimeout(() => {
-    selectedProduct.value = null
-  }, 300)
-}
-
-
-const handleFavorite = ({ product, favorite }) => {
-  if (favorite) {
-    favorites.value.push(product.id)
-  } else {
-    favorites.value = favorites.value.filter(id => id !== product.id)
-  }
-  favoriteCount.value = favorites.value.length
-}
-
-// Expose favoriteCount to parent components if needed
-defineExpose({
-  favoriteCount
-})
-</script> -->
-
-<!-- <template>
-  <div class="w-100">
-    <v-list class="w-100 d-flex flex-wrap ga-2">
-      <v-list-item class="item mb-10" v-for="(product, i) in products" :key="i" :value="product">
-        <product-card
-          :image="product.images[0]"
-          :name="product.name"
-          :price="product.price"
-          :product="product"
-          @click="openProductDetails"
-          @favorite="handleFavorite"
-          :is-favorite="favorites.includes(product.id)"
-        />
-      </v-list-item>
-    </v-list>
-
-    <product-modal
-      v-if="selectedProduct"
-      :product="selectedProduct"
-      :show="showDetails"
-      @close="closeDetails"
-    />
-  </div>
-</template> -->
-
-<!-- <style>
-.item {
-  width: 18%;
-}
-
-@media (max-width: 1200px) {
-  .item {
-    width: 18%;
-  }
-}
-
-@media (max-width: 1024px) {
-  .item {
-    width: 30%;
-  }
-}
-
-@media (max-width: 600px) {
-  .item {
-    width: 100%;
-  }
-}
-
-@media (max-width: 400px) {
-  .item {
-    width: 100%;
-  }
-}
-</style> -->
-
-
-
-
-
 <script setup>
 import { products } from '@/data/product-data'
 import ProductCard from '@/components/product/ProductCard.vue'
@@ -108,14 +8,14 @@ const selectedProduct = ref(null)
 const showDetails = ref(false)
 const favoriteCount = ref(0)
 const favorites = ref([])
-const activeCategory = ref('all') // Default to show all products
+const activeCategory = ref('all')
 
 // Get unique categories from products
 const categories = computed(() => {
-  const allCategories = ['all', ...new Set(products.map(product => product.category))]
-  return allCategories.map(category => ({
+  const allCategories = ['all', ...new Set(products.map((product) => product.category))]
+  return allCategories.map((category) => ({
     name: category,
-    label: category === 'all' ? 'All Products' : formatCategoryName(category)
+    label: category === 'all' ? 'All Products' : formatCategoryName(category),
   }))
 })
 
@@ -123,14 +23,14 @@ const categories = computed(() => {
 function formatCategoryName(category) {
   return category
     .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
 }
 
 // Filter products by active category
 const filteredProducts = computed(() => {
   if (activeCategory.value === 'all') return products
-  return products.filter(product => product.category === activeCategory.value)
+  return products.filter((product) => product.category === activeCategory.value)
 })
 
 const openProductDetails = (product) => {
@@ -149,7 +49,7 @@ const handleFavorite = ({ product, favorite }) => {
   if (favorite) {
     favorites.value.push(product.id)
   } else {
-    favorites.value = favorites.value.filter(id => id !== product.id)
+    favorites.value = favorites.value.filter((id) => id !== product.id)
   }
   favoriteCount.value = favorites.value.length
 }
@@ -157,15 +57,12 @@ const handleFavorite = ({ product, favorite }) => {
 
 <template>
   <div class="w-100 product-listing">
-
     <div>
-<h3 class="text-h3 font-weight-bold mt-10 mb-5">
-Shop
-</h3>
+      <h3 class="text-h3 font-weight-bold mt-10 mb-5">Shop</h3>
     </div>
     <!-- Category Navigation -->
     <div class="category-nav mb-8">
-      <v-tabs v-model="activeCategory" center-active show-arrows>
+      <v-tabs v-model="activeCategory" center-active>
         <v-tab
           v-for="category in categories"
           :key="category.name"

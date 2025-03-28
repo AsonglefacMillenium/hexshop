@@ -2,9 +2,8 @@
 import { ref, watch, nextTick } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation, Thumbs, Pagination } from 'swiper/modules'
-
 import cancelIcon from '@/assets/icons/cancelIcon.svg'
-// Import Swiper styles
+
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -84,7 +83,8 @@ watch(
       </v-card-title>
 
       <v-card-text v-if="product" class="p-0 m-0">
-        <v-row >
+        <v-row>
+          <!-- Left column - Image gallery -->
           <v-col cols="12" md="6">
             <div class="swiper-container">
               <swiper
@@ -118,12 +118,12 @@ watch(
             </div>
           </v-col>
 
-          <v-col cols="12" md="6">
-            <div class="product-info h-100">
+          <v-col cols="12" md="6" class="product-info-col">
+            <div class="scrollable-content">
               <h2 class="product-name">{{ product.name }}</h2>
               <div class="product-price">${{ product.price }}</div>
 
-              <v-tabs v-model="activeTab" class="mt-4">
+              <v-tabs v-model="activeTab" class="mt-4" hide-slder show-arrows="false">
                 <v-tab value="description">Description</v-tab>
                 <v-tab value="specs">Specifications</v-tab>
               </v-tabs>
@@ -143,9 +143,9 @@ watch(
                   </v-table>
                 </v-window-item>
               </v-window>
-
-              <v-btn size="large" class="order_btn w-100" @click="openOrderForm"> Order Now </v-btn>
             </div>
+
+            <v-btn size="large" class="order-btn" @click="openOrderForm"> Order Now </v-btn>
           </v-col>
         </v-row>
       </v-card-text>
@@ -170,7 +170,7 @@ watch(
         <v-form class="mt-4">
           <v-text-field label="Name" variant="outlined" required></v-text-field>
           <v-text-field label="Phone" variant="outlined" required></v-text-field>
-          <v-btn color="black" block size="large" type="submit"> Submit Order </v-btn>
+          <v-btn color="black" block size="large" type="submit">Submit Order</v-btn>
         </v-form>
       </v-card-text>
     </v-card>
@@ -178,6 +178,12 @@ watch(
 </template>
 
 <style scoped>
+.modalcard__wrapper {
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .swiper-container {
   margin-top: -50px;
 }
@@ -212,11 +218,17 @@ watch(
   border-radius: 4px;
 }
 
-.product-info {
-  height: 100%;
+.product-info-col {
   display: flex;
   flex-direction: column;
+  height: calc(90vh - 60px);
+  padding-bottom: 0;
+}
+
+.scrollable-content {
   flex: 1;
+  overflow-y: auto;
+  padding-bottom: 16px;
 }
 
 .product-name {
@@ -232,7 +244,16 @@ watch(
   margin-bottom: 16px;
 }
 
-/* Customize swiper navigation buttons */
+.order-btn {
+  background-color: #000000;
+  color: white;
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  margin-top: 16px;
+}
+
 .swiper-button-next,
 .swiper-button-prev {
   color: white;
@@ -247,7 +268,6 @@ watch(
   font-size: 20px;
 }
 
-/* Customize pagination bullets */
 .swiper-pagination-bullet {
   background: white;
   opacity: 0.6;
@@ -258,25 +278,29 @@ watch(
   opacity: 1;
 }
 
-.order_btn {
-  margin-top: auto;
-  background-color: #000000;
-  color: white;
-}
-
 .form__product_name {
   width: 75%;
+}
 
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+.v-tabs >>> .v-slide-group__prev,
+.v-tabs >>> .v-slide-group__next {
+  display: none !important;
 }
 
 @media (max-width: 800px) {
   .modalcard__wrapper {
     width: 100%;
-
   }
+
+  .swiper-container {
+    margin-top: -100px;
+  }
+
+  .product-info-col {
+    height: auto;
+    max-height: 50vh;
+  }
+
   .form__product_name {
     width: 75%;
   }
@@ -288,13 +312,9 @@ watch(
     flex-wrap: wrap;
     margin-top: 20px;
   }
-  .card-title{
-    margin-bottom: 0
+
+  .card-title {
+    margin-bottom: 0;
   }
-
-  .swiper-container {
-  margin-top: -100px;
-}
-
 }
 </style>

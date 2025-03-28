@@ -1,11 +1,10 @@
-import { aliases, md } from 'vuetify/iconsets/md';
+import { aliases, md } from 'vuetify/iconsets/md'
 
-import likeIcon from '@/assets/icons/likeIcon.svg';
-import addIcon from '@/assets/icons/addIcon.svg';
-import CareLeft from "@/assets/icons/CaretLeft.svg"
-import CareRight from "@/assets/icons/CaretRight.svg"
-import cancelIcon from "@/assets/icons/cancelIcon.svg"
-
+import likeIcon from '@/assets/icons/likeIcon.svg'
+import addIcon from '@/assets/icons/addIcon.svg'
+import CareLeft from '@/assets/icons/CaretLeft.svg'
+import CareRight from '@/assets/icons/CaretRight.svg'
+import cancelIcon from '@/assets/icons/cancelIcon.svg'
 
 export const myAliases = {
   ...aliases,
@@ -13,12 +12,7 @@ export const myAliases = {
   addIcon,
   CareLeft,
   CareRight,
-  cancelIcon
+  cancelIcon,
+}
 
-};
-
-export const iconSets = { md } as Record<string, any>;
-
-
-
-
+export const iconSets = { md } as Record<string, any>
