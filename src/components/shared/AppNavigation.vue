@@ -155,10 +155,7 @@ const navItems = [
   display: none;
 }
 @media (max-width: 920px) {
-  .navbar {
-    padding: 0;
-    background-color: red;
-  }
+ 
 
   .menu-icon {
     display: block;
