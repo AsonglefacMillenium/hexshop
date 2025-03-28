@@ -155,7 +155,7 @@ const navItems = [
   display: none;
 }
 @media (max-width: 920px) {
- 
+
 
   .menu-icon {
     display: block;
@@ -165,6 +165,14 @@ const navItems = [
     display: flex;
     gap: 0;
   }
+
+  .icons-mobile__account {
+  display: block;
+}
+
+.icons-mobile .icons-mobile__like {
+  display: block;
+}
 
   .mobile-menu-overlay {
     position: fixed;
